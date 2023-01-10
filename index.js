@@ -1,3 +1,7 @@
+const redux = require("redux");
+
+const createStore = redux.createStore;
+
 const BUY_CAKE = "BUY_CAKE";
 
 //action creator function
@@ -24,3 +28,18 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 };
+
+//store responsibilities
+const store = createStore(reducer);
+console.log("Initial State:", store.getState());
+const unsubscribe = store.subscribe(() =>
+    console.log("Updated State:", store.getState())
+);
+//dispatching action
+store.dispatch(buyCake());
+//we can also pass actions directly like this
+store.dispatch({ type: BUY_CAKE });
+store.dispatch(buyCake());
+store.dispatch(buyCake());
+store.dispatch(buyCake());
+unsubscribe();
