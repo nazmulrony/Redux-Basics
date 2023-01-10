@@ -89,6 +89,7 @@ console.log("Initial State:", store.getState());
 const unsubscribe = store.subscribe(() =>
     console.log("Updated State:", store.getState())
 );
+
 //dispatching action
 store.dispatch(buyCake());
 //we can also pass actions directly like this
