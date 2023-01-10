@@ -2,7 +2,14 @@ const redux = require("redux");
 
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers;
+//apply middleware form redux to use it createStore function
+const applyMiddleware = redux.applyMiddleware;
 
+//redux logger
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
+
+//constants
 const BUY_CAKE = "BUY_CAKE";
 const BUY_ICE_CREAM = "BUY_ICE_CREAM";
 
@@ -84,11 +91,9 @@ const rootReducer = combineReducers({
     iceCream: iceCreamReducer,
 });
 //store responsibilities
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(logger));
 console.log("Initial State:", store.getState());
-const unsubscribe = store.subscribe(() =>
-    console.log("Updated State:", store.getState())
-);
+const unsubscribe = store.subscribe(() => {});
 
 //dispatching action
 store.dispatch(buyCake());
